@@ -7,6 +7,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuItem,
+  DropdownMenuCheckboxItem,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from './badge';
 import { ArrowLeftCircle, ArrowRightCircle, ArrowUpDown, Monitor, PlusIcon, UploadCloud, XIcon } from 'lucide-react';
@@ -30,6 +31,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
+
+
+type Checked = DropdownMenuCheckboxItemProps["checked"]
+
 
 function Filters({ data }: {
   data: Automation[]
@@ -44,12 +50,20 @@ function Filters({ data }: {
   const { setFilteredData } = useContext(FilteredDataContext);
 
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
+  const [openSites, setOpenSites] = React.useState(false)
+
+  const [value, setCategoriesValue] = React.useState("")
+  const [sites, setSitesValue] = React.useState([] as any)
+
+
+  const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true)
+  const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false)
+  const [showPanel, setShowPanel] = React.useState<Checked>(false)
 
 
   useEffect(() => {
     const filteredData = data.filter(item => {
-      const siteMatch = filters.selectedSites.length === 0 || filters.selectedSites.includes(item.sites[0].title);
+      const siteMatch = filters.selectedSites.length === 0 || filters.selectedSites.includes(item.sites[0].slug);
       const categoryMatch = filters.selectedCategories.length === 0 || filters.selectedCategories.includes(item.categories[0]?.slug);
       const extractMatch = !filters.extractData || item.slug.startsWith("scrape-");
       const monitorMatch = !filters.monitor || item.slug.startsWith("monitor-");
@@ -166,27 +180,67 @@ function Filters({ data }: {
         </label>
 
         <div>
-          <DropdownMenu>
+          {/* <DropdownMenu>
             <DropdownMenuTrigger>
-              <Badge
-                className='m-2'
-                variant={filters.selectedSites.length === 0 ? "outline" : "default"}>
-                <PlusIcon height={14}></PlusIcon>
-                Sites</Badge>
+
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
               <DropdownMenuLabel>Filter by Site</DropdownMenuLabel>
               <DropdownMenuSeparator />
               {siteOptions.map((site) => (
-                <DropdownMenuItem
+                <DropdownMenuCheckboxItem
                   key={site}
-                  onSelect={() => handleSiteSelect(site)}
+                  onSelect={() => { handleSiteSelect(site), setSitesValue([...sites, site]) }}
+                  checked={showStatusBar}
+                  onCheckedChange={setShowStatusBar}
                 >
                   {site}
-                </DropdownMenuItem>
+                </DropdownMenuCheckboxItem>
               ))}
             </DropdownMenuContent>
-          </DropdownMenu>
+          </DropdownMenu> */}
+
+          <Popover open={openSites} onOpenChange={setOpenSites}>
+            <PopoverTrigger
+            >
+              <Badge
+                className='m-2'
+                variant={filters.selectedSites.length === 0 ? "outline" : "default"}>
+                <PlusIcon height={14}></PlusIcon>
+                Sites
+
+              </Badge>
+
+            </PopoverTrigger>
+            <PopoverContent className="w-[200px] p-0">
+              <Command>
+                <CommandInput placeholder="Search sites..." />
+                <CommandEmpty>No sites found.</CommandEmpty>
+                <CommandGroup>
+                  {siteOptions.map((site, index) => (
+                    <CommandItem
+                      key={index}
+                      value={site}
+                      onSelect={(currentValue) => {
+                        handleSiteSelect(currentValue);
+                         setSitesValue([...sites, currentValue])
+
+                        setOpenSites(false)
+                      }}
+                    >
+                      <Check
+                        className={cn(
+                          "mr-2 h-4 w-4",
+                          sites === site ? "opacity-100" : "opacity-0"
+                        )}
+                      />
+                      {site}
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              </Command>
+            </PopoverContent>
+          </Popover>
 
         </div>
         {filters.selectedSites.map((site) => (
@@ -222,7 +276,7 @@ function Filters({ data }: {
                       key={index}
                       value={category}
                       onSelect={(currentValue) => {
-                        setValue(currentValue)
+                        setCategoriesValue(currentValue)
                         handleCategorySelect(currentValue)
 
                         setOpen(false)
