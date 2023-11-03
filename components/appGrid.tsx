@@ -13,7 +13,7 @@ function AppGrid({ data }: {
 
 
   return (
- <div className="grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 lg:text-left gap-4">
+    <div className="grid text-center lg:max-w-5xl lg:w-full  lg:mb-0 lg:grid-cols-4 md:grid-cols-3 grid-cols-1 lg:text-left gap-4">
       {filteredData.map((item: { sites: { logoSmall2x: string | StaticImport; }[]; title: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; shortDescription: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; }, index: React.Key | null | undefined) => (
         <div key={index} className="group rounded-lg border border-transparent transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
           <Card className="">

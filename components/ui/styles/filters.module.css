@@ -1,28 +1,32 @@
 
+.menu {
+    padding-right: 10px;
+    width: 90%;
+    white-space: nowrap;
+    overflow: auto;
+}
 
 
 /* Desktop */
 @media (min-width: 1025px) {
-    .showArrows {
+    /* .showArrows {
         display: none;
-    }
-    .menu {
-        padding-right: 10px;
-        width: 1000px;
-        white-space: nowrap;
-        overflow: auto;
-    }
+    } */
+
 }
 
 
 /* Mobile */
-@media (max-width: 768px) {
-    .menu {
-        display: flex;
-        margin: 10px;
-        width: 95%;
-        white-space: nowrap;
-        overflow: auto;
+@media (max-width: 800px) {
+
+
+    .filterContainer{
+        width: 500px;
     }
+    
 }
 
+
+.menu::-webkit-scrollbar {
+    display: none;
+}

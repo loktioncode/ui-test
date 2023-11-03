@@ -14,7 +14,6 @@ import styles from './styles/filters.module.css'; // Import your CSS module
 import { Automation } from '@/lib/types';
 import { FilteredDataContext, FilteredDataProvider } from '@/lib/data-context'
 
-
 function Filters({ data }: {
   data: Automation[]
 }) {
@@ -91,10 +90,8 @@ function Filters({ data }: {
 
 
   return (
-    <div className={`flex flex-row`}>
-      <div className={` ${styles.showArrows}`} id="slideLeft" >
-        <ArrowLeftCircle></ArrowLeftCircle>
-      </div>
+    <div className={``}>
+
       {/* ${styles.badgesContainer} */}
       <div className={`flex flex-row  ${styles.menu} `}  >
 
