@@ -92,16 +92,17 @@ function Filters({ data }: {
   const [scrollLeft, setScrollLeft] = useState(0);
 
   const handleScrollLeft = () => {
-    setScrollLeft(scrollLeft - 100); // Adjust the scroll amount as needed
+    alert
+    setScrollLeft(scrollLeft - 15); // Adjust the scroll amount as needed
   };
 
   const handleScrollRight = () => {
-    setScrollLeft(scrollLeft + 100); // Adjust the scroll amount as needed
+    setScrollLeft(scrollLeft + 15); // Adjust the scroll amount as needed
   };
 
   return (
     <div className={`flex flex-row`}>
-      <div className={` ${styles.showArrows}`} id="slideLeft" >
+      <div className={` ${styles.showArrows}`} id="slideLeft" onClick={()=>handleScrollLeft} >
         <ArrowLeftCircle></ArrowLeftCircle>
       </div>
       {/* ${styles.badgesContainer} */}
