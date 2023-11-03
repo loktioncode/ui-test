@@ -52,13 +52,9 @@ function Filters({ data }: {
   const [open, setOpen] = React.useState(false)
   const [openSites, setOpenSites] = React.useState(false)
 
+  //
   const [value, setCategoriesValue] = React.useState("")
   const [sites, setSitesValue] = React.useState([] as any)
-
-
-  const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true)
-  const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false)
-  const [showPanel, setShowPanel] = React.useState<Checked>(false)
 
 
   useEffect(() => {
@@ -180,25 +176,6 @@ function Filters({ data }: {
         </label>
 
         <div>
-          {/* <DropdownMenu>
-            <DropdownMenuTrigger>
-
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
-              <DropdownMenuLabel>Filter by Site</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {siteOptions.map((site) => (
-                <DropdownMenuCheckboxItem
-                  key={site}
-                  onSelect={() => { handleSiteSelect(site), setSitesValue([...sites, site]) }}
-                  checked={showStatusBar}
-                  onCheckedChange={setShowStatusBar}
-                >
-                  {site}
-                </DropdownMenuCheckboxItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu> */}
 
           <Popover open={openSites} onOpenChange={setOpenSites}>
             <PopoverTrigger
@@ -223,15 +200,14 @@ function Filters({ data }: {
                       value={site}
                       onSelect={(currentValue) => {
                         handleSiteSelect(currentValue);
-                         setSitesValue([...sites, currentValue])
-
+                        setSitesValue([...sites, currentValue])
                         setOpenSites(false)
                       }}
                     >
                       <Check
                         className={cn(
                           "mr-2 h-4 w-4",
-                          sites === site ? "opacity-100" : "opacity-0"
+                          filters.selectedSites.includes(site) ? "opacity-100" : "opacity-0"
                         )}
                       />
                       {site}
