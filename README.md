@@ -1,6 +1,8 @@
 
 ## FrontEnd Dev Take Home - Elisha Bere
 
+LIVE LINK - ([FE-TEST-UI)](https://gg-fe-test-f9mfbhbz7-loktioncode.vercel.app/)
+
 First, run the development server:
 
 ```bash
