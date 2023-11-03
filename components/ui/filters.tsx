@@ -14,7 +14,22 @@ import styles from './styles/filters.module.css'; // Import your CSS module
 import { Automation } from '@/lib/types';
 import { FilteredDataContext, FilteredDataProvider } from '@/lib/data-context'
 import { useOverflowX } from '@/lib/utils';
+import { Check, ChevronsUpDown } from "lucide-react"
 
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from "@/components/ui/command"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 
 function Filters({ data }: {
   data: Automation[]
@@ -28,10 +43,14 @@ function Filters({ data }: {
 
   const { setFilteredData } = useContext(FilteredDataContext);
 
+  const [open, setOpen] = React.useState(false)
+  const [value, setValue] = React.useState("")
+
+
   useEffect(() => {
     const filteredData = data.filter(item => {
       const siteMatch = filters.selectedSites.length === 0 || filters.selectedSites.includes(item.sites[0].title);
-      const categoryMatch = filters.selectedCategories.length === 0 || filters.selectedCategories.includes(item.categories[0]?.title);
+      const categoryMatch = filters.selectedCategories.length === 0 || filters.selectedCategories.includes(item.categories[0]?.slug);
       const extractMatch = !filters.extractData || item.slug.startsWith("scrape-");
       const monitorMatch = !filters.monitor || item.slug.startsWith("monitor-");
 
@@ -52,7 +71,7 @@ function Filters({ data }: {
 
 
   // Extract unique category options
-  const categoryOptions: string[] = [...(Array.from(new Set(data.flatMap(item => item.categories.map(category => category.title)))))];
+  const categoryOptions: string[] = [...(Array.from(new Set(data.flatMap(item => item.categories.map(category => category.slug)))))];
 
   const toggleExtractData = () => {
     setFilters({ ...filters, extractData: !filters.extractData });
@@ -181,27 +200,47 @@ function Filters({ data }: {
           </Badge>
         ))}
         <div>
-          <DropdownMenu>
-            <DropdownMenuTrigger>
+
+          <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger
+            >
               <Badge
+                aria-expanded={open}
                 className='m-2'
                 variant={filters.selectedCategories.length === 0 ? "outline" : "default"}>
                 <PlusIcon height={14}></PlusIcon>
                 Categories</Badge>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
-              <DropdownMenuLabel>Filter by Category</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {categoryOptions.map((category) => (
-                <DropdownMenuItem
-                  key={category}
-                  onSelect={() => handleCategorySelect(category)}
-                >
-                  {category}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+
+            </PopoverTrigger>
+            <PopoverContent className="w-[200px] p-0">
+              <Command>
+                <CommandInput placeholder="Search framework..." />
+                <CommandEmpty>No framework found.</CommandEmpty>
+                <CommandGroup>
+                  {categoryOptions.map((category, index) => (
+                    <CommandItem
+                      key={index}
+                      value={category}
+                      onSelect={(currentValue) => {
+                        setValue(currentValue)
+                        handleCategorySelect(currentValue)
+
+                        setOpen(false)
+                      }}
+                    >
+                      <Check
+                        className={cn(
+                          "mr-2 h-4 w-4",
+                          value === category ? "opacity-100" : "opacity-0"
+                        )}
+                      />
+                      {category}
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              </Command>
+            </PopoverContent>
+          </Popover>
 
         </div>
         {filters.selectedCategories.map((category) => (

@@ -10,7 +10,7 @@ function AppGrid({ data }: {
   data: Automation[]
 }) {
   const { filteredData } = useContext(FilteredDataContext);
-
+console.log(filteredData)
 
   return (
     <div className="grid text-center lg:max-w-5xl lg:w-full  lg:mb-0 lg:grid-cols-4 md:grid-cols-3 grid-cols-1 lg:text-left gap-4">
