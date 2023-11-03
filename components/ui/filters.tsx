@@ -13,6 +13,7 @@ import { ArrowLeftCircle, ArrowRightCircle, ArrowUpDown, Monitor, PlusIcon, Uplo
 import styles from './styles/filters.module.css'; // Import your CSS module
 import { Automation } from '@/lib/types';
 import { FilteredDataContext, FilteredDataProvider } from '@/lib/data-context'
+import { useOverflowX } from '@/lib/utils';
 
 
 function Filters({ data }: {
@@ -89,24 +90,37 @@ function Filters({ data }: {
     setFilters({ ...filters, selectedSites: filters.selectedSites.filter(site => site !== selectedSite) });
   };
 
-  const [scrollLeft, setScrollLeft] = useState(0);
+  const [overflowActive, setOverflowActive] = useState(false);
+  const spanRef = useRef<HTMLDivElement | null>(null);
 
-  const handleScrollLeft = () => {
-    alert
-    setScrollLeft(scrollLeft - 15); // Adjust the scroll amount as needed
-  };
+  useEffect(() => {
+    if (spanRef.current) {
+      setOverflowActive(
+        spanRef.current.offsetWidth < spanRef.current.scrollWidth
+      );
+    }
+  }, [filters]);
 
-  const handleScrollRight = () => {
-    setScrollLeft(scrollLeft + 15); // Adjust the scroll amount as needed
-  };
+  const goLeft = () => {
+    if (spanRef.current) {
+      spanRef.current.scrollLeft -= 150;
+    }
+  }
+
+  const goRight = () => {
+    if (spanRef.current) {
+      spanRef.current.scrollLeft += 150;
+    }
+  }
 
   return (
     <div className={`flex flex-row`}>
-      <div className={` ${styles.showArrows}`} id="slideLeft" onClick={()=>handleScrollLeft} >
+      {overflowActive && <div className={'cursor-pointer'} id="slideLeft" onClick={goLeft} >
         <ArrowLeftCircle></ArrowLeftCircle>
-      </div>
+      </div>}
+
       {/* ${styles.badgesContainer} */}
-      <div className={`flex flex-row  ${styles.menu} `} onScroll={(e) => setScrollLeft(e.currentTarget.scrollLeft)} >
+      <div className={`flex flex-row ${styles.menu} `} ref={spanRef} >
 
         <label>
           <Badge
@@ -201,9 +215,9 @@ function Filters({ data }: {
         ))}
 
       </div>
-      <div className={`${styles.showArrows}`} id="slideRight">
+      {overflowActive && <div className={'cursor-pointer'} id="slideRight" onClick={goRight}>
         <ArrowRightCircle className='text-red'></ArrowRightCircle>
-      </div>
+      </div>}
     </div>
   );
 }

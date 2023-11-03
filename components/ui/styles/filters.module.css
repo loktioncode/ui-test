@@ -1,36 +1,39 @@
-
 .menu {
-    padding-right:40px;
-    padding-left:40px;
     scroll-behavior: 'smooth';
-    width: 1200px;
+    width: 1000px;
     white-space: nowrap;
-    overflow: auto;
+    overflow: scroll;
     margin-left: 3%;
+    transition: scroll 0.3s ease-in-out;
+    /* Add a smooth scroll transition */
+    scroll-behavior: smooth;
+    /* Enable smooth scrolling */
 }
 
-
-
-/* Desktop */
-@media (min-width: 1025px) {
-    /* .showArrows {
-        display: none;
-    } */
-
-}
-
-
-/* Mobile */
-@media (max-width: 800px) {
-
-
-    .filterContainer{
-        width: 500px;
-    }
-    
-}
 
 
 .menu::-webkit-scrollbar {
     display: none;
+}
+
+
+/* Small screens */
+@media screen and (max-width: 768px) {
+    .flex.flex-row {
+        flex-direction: column;
+    }
+
+    .menu {
+
+        width: 340px;
+
+    }
+}
+
+
+/* Medium screens */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .flex.flex-row {
+        flex-direction: row;
+    }
 }
