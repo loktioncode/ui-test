@@ -14,6 +14,7 @@ import styles from './styles/filters.module.css'; // Import your CSS module
 import { Automation } from '@/lib/types';
 import { FilteredDataContext, FilteredDataProvider } from '@/lib/data-context'
 
+
 function Filters({ data }: {
   data: Automation[]
 }) {
@@ -88,12 +89,23 @@ function Filters({ data }: {
     setFilters({ ...filters, selectedSites: filters.selectedSites.filter(site => site !== selectedSite) });
   };
 
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const handleScrollLeft = () => {
+    setScrollLeft(scrollLeft - 100); // Adjust the scroll amount as needed
+  };
+
+  const handleScrollRight = () => {
+    setScrollLeft(scrollLeft + 100); // Adjust the scroll amount as needed
+  };
 
   return (
-    <div className={``}>
-
+    <div className={`flex flex-row`}>
+      <div className={` ${styles.showArrows}`} id="slideLeft" >
+        <ArrowLeftCircle></ArrowLeftCircle>
+      </div>
       {/* ${styles.badgesContainer} */}
-      <div className={`flex flex-row  ${styles.menu} `}  >
+      <div className={`flex flex-row  ${styles.menu} `} onScroll={(e) => setScrollLeft(e.currentTarget.scrollLeft)} >
 
         <label>
           <Badge

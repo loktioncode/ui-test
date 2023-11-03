@@ -1,10 +1,18 @@
 
 .menu {
-    padding-right: 10px;
-    width: 90%;
+    padding-right:40px;
+    padding-left:40px;
+    scroll-behavior: 'smooth';
+    width: 1200px;
     white-space: nowrap;
     overflow: auto;
 }
+
+
+.menuRow {
+    width: '200%', 
+}
+
 
 
 /* Desktop */
