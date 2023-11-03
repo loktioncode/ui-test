@@ -17,21 +17,24 @@
 }
 
 
-/* Small screens */
-@media screen and (max-width: 768px) {
+@media screen and (max-width:600px) {
     .flex.flex-row {
         flex-direction: column;
     }
 
     .menu {
-
         width: 340px;
+    }
+}
 
+@media screen and (min-width: 601px) and (max-width: 768px) {
+
+    .menu {
+        width: 640px;
     }
 }
 
 
-/* Medium screens */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
     .flex.flex-row {
         flex-direction: row;

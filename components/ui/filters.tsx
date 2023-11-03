@@ -103,6 +103,7 @@ function Filters({ data }: {
 
   const goLeft = () => {
     if (spanRef.current) {
+     
       spanRef.current.scrollLeft -= 150;
     }
   }

@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center p-4 lg:p-24">
-      <div className="max-w-5xl w-full text-center lg:flex justify-between">
+      <div className="max-w-5xl w-full text-center lg:flex justify-between tex">
         <a
           href="https://github.com/loktioncode/ui-test"
           target="_blank"
@@ -32,26 +32,12 @@ export default function Home() {
           </p>
         </a>
 
-        <div className="bg-gradient-to-t  lg:bg-none lg:static lg:w-auto lg:justify-end">
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex place-items-center gap-2 lg:p-0 text-xl font-semibold"
-          >
-            FE Developer Interview Challenge{' '}
-         
-          </a>
-        </div>
+     
       </div>
       <div className='my-10 flex flex-row items-center'>
-        <div className="lg:hidden cursor-pointer" onClick={() => handleScroll(200)}>
-          <ArrowLeftCircle />
-        </div>
+
         <Filters data={data?.data?.oneClickAutomations?.items} />
-        <div className="lg:hidden cursor-pointer" onClick={() => handleScroll(200)}>
-          <ArrowRightCircle className='text-red' />
-        </div>
+
       </div>
       <AppGrid data={data?.data?.oneClickAutomations?.items} />
     </main>
