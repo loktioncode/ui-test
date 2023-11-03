@@ -1,0 +1,30 @@
+
+
+
+/* Desktop */
+@media (min-width: 1025px) {
+    .showArrows {
+        display: none;
+    }
+    .menu {
+        padding-right: 10px;
+        width: 1000px;
+        white-space: nowrap;
+        overflow: auto;
+    }
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+    .menu {
+        display: flex;
+        margin: 10px;
+        width: 80%;
+        white-space: nowrap;
+        overflow: auto;
+    }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {}
