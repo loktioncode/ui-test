@@ -20,11 +20,9 @@
     .menu {
         display: flex;
         margin: 10px;
-        width: 80%;
+        width: 95%;
         white-space: nowrap;
         overflow: auto;
     }
 }
 
-/* Tablet */
-@media (min-width: 769px) and (max-width: 1024px) {}
