@@ -3,13 +3,9 @@
     width: 1000px;
     white-space: nowrap;
     overflow: scroll;
-    margin-left: 3%;
     transition: scroll 0.3s ease-in-out;
-    /* Add a smooth scroll transition */
     scroll-behavior: smooth;
-    /* Enable smooth scrolling */
 }
-
 
 
 .menu::-webkit-scrollbar {
@@ -39,4 +35,11 @@
     .flex.flex-row {
         flex-direction: row;
     }
+}
+
+#slideLeft{
+    background-color: #fff;
+    border: #8d1414 2px;
+    padding: 10px;
+    
 }

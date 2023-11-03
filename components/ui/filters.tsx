@@ -103,7 +103,7 @@ function Filters({ data }: {
 
   const goLeft = () => {
     if (spanRef.current) {
-     
+
       spanRef.current.scrollLeft -= 150;
     }
   }
@@ -117,8 +117,9 @@ function Filters({ data }: {
   return (
     <div className={`flex flex-row`}>
       {overflowActive && <div className={'cursor-pointer'} id="slideLeft" onClick={goLeft} >
-        <ArrowLeftCircle></ArrowLeftCircle>
+        <ArrowLeftCircle className='text-purple-800'></ArrowLeftCircle>
       </div>}
+
 
       {/* ${styles.badgesContainer} */}
       <div className={`flex flex-row ${styles.menu} `} ref={spanRef} >
@@ -217,7 +218,7 @@ function Filters({ data }: {
 
       </div>
       {overflowActive && <div className={'cursor-pointer'} id="slideRight" onClick={goRight}>
-        <ArrowRightCircle className='text-red'></ArrowRightCircle>
+        <ArrowRightCircle className='text-purple-800'></ArrowRightCircle>
       </div>}
     </div>
   );
