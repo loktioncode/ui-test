@@ -25,7 +25,7 @@ function Filters({ data }: {
     selectedCategories: [] as string[],
   });
 
-  const { filteredData, setFilteredData } = useContext(FilteredDataContext);
+  const { setFilteredData } = useContext(FilteredDataContext);
 
   useEffect(() => {
     const filteredData = data.filter(item => {
