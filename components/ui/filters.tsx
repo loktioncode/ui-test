@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from './badge';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from './select';
+import { ArrowUpDown, Monitor, PlusIcon, UploadCloud, XIcon } from 'lucide-react';
 
 type Automation = {
   id: string;
@@ -101,6 +102,7 @@ function Filters({ data, onFilterChange }: {
           variant={filters.extractData ? 'default' : 'outline'}
           onClick={toggleExtractData}
         >
+          <ArrowUpDown height={14}></ArrowUpDown>
           Extract Data
         </Badge>
       </label>
@@ -110,6 +112,7 @@ function Filters({ data, onFilterChange }: {
           variant={filters.monitor ? 'default' : 'outline'}
           onClick={toggleMonitor}
         >
+          <Monitor height={14}></Monitor>
           Monitor
         </Badge>
       </label>
@@ -117,7 +120,9 @@ function Filters({ data, onFilterChange }: {
       <div>
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <Badge variant={filters.selectedSites.length === 0 ? "outline" : "default"}>Sites</Badge>
+            <Badge variant={filters.selectedSites.length === 0 ? "outline" : "default"}>
+              <PlusIcon height={14}></PlusIcon>
+              Sites</Badge>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
             <DropdownMenuLabel>Filter by Site</DropdownMenuLabel>
@@ -138,7 +143,9 @@ function Filters({ data, onFilterChange }: {
       <div>
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <Badge variant={filters.selectedCategories.length === 0 ? "outline" : "default"}>Categories</Badge>
+            <Badge variant={filters.selectedCategories.length === 0 ? "outline" : "default"}>
+              <PlusIcon height={14}></PlusIcon>
+              Categories</Badge>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
             <DropdownMenuLabel>Filter by Category</DropdownMenuLabel>
@@ -158,17 +165,20 @@ function Filters({ data, onFilterChange }: {
       {filters.selectedCategories.map((category) => (
         <Badge
           key={category}
-          onClick={() => removeCategory(category)}
         >
+          <XIcon  height={14}  onClick={() => removeCategory(category)}></XIcon>
+
           {category}
         </Badge>
       ))}
       {filters.selectedSites.map((site) => (
         <Badge
           key={site}
-          onClick={() => removeSite(site)}
+
         >
           {site}
+          <XIcon height={14} onClick={() => removeSite(site)} ></XIcon>
+
         </Badge>
       ))}
     </div>
