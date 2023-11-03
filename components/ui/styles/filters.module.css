@@ -6,11 +6,7 @@
     width: 1200px;
     white-space: nowrap;
     overflow: auto;
-}
-
-
-.menuRow {
-    width: '200%', 
+    margin-left: 3%;
 }
 
 
