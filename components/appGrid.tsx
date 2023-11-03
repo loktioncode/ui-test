@@ -2,46 +2,53 @@
 import { FilteredDataContext } from '@/lib/data-context';
 import { Automation } from '@/lib/types';
 import React, { useContext } from 'react';
-
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
+import Image from 'next/image'
 
 function AppGrid({ data }: {
   data: Automation[]
 }) {
   const { filteredData } = useContext(FilteredDataContext);
 
-  console.log(">>RESULT>>DATA>>", filteredData)
 
   return (
-    <div className={`flex flex-row`}>
-
-      <div className=" grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
 
 
-        {
-          filteredData.map((item: Automation, index: number) => (
-            <a
-              key={index}
-              href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-              className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h2 className={`mb-3 text-2xl font-semibold`}>
-                Deploy{' '}
-                <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                  -&gt;
-                </span>
-              </h2>
-              <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                Instantly deploy your Next.js site to a shareable URL with Vercel.
-              </p>
-            </a>
-          ))
-        }
+    <div className=" grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left gap-4">
 
 
-      </div>
+      {
+        filteredData.map((item: Automation, index: number) => (
+          <div key={index} className="group rounded-lg border border-transparent  transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
+            <Card className=''>
+              <CardHeader >
+                <Image
+                  src={item?.sites[0]?.logoSmall2x}
+                  alt="Vercel Logo"
+                  className="p-2"
+                  width={50}
+                  height={30}
+                  priority
+                />
+                <CardTitle className='text-lg font-bold text-black line-clamp-2'>
+                  {item?.title}
+                </CardTitle>
+
+              </CardHeader>
+              <CardContent>
+                <CardDescription className='text-sm line-clamp-3'>{item?.shortDescription
+                }</CardDescription>
+              </CardContent>
+
+            </Card>
+          </div>
+
+        ))
+      }
+
+
     </div>
+
   );
 }
 

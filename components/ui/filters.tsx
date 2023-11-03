@@ -89,8 +89,6 @@ function Filters({ data }: {
     setFilters({ ...filters, selectedSites: filters.selectedSites.filter(site => site !== selectedSite) });
   };
 
-  const sliderRef = useRef(null);
-  const scrollAmount = 100;
 
   return (
     <div className={`flex flex-row`}>
@@ -98,7 +96,7 @@ function Filters({ data }: {
         <ArrowLeftCircle></ArrowLeftCircle>
       </div>
       {/* ${styles.badgesContainer} */}
-      <div className={`flex flex-row  ${styles.menu} `} ref={sliderRef} >
+      <div className={`flex flex-row  ${styles.menu} `}  >
 
         <label>
           <Badge
